@@ -3,7 +3,7 @@ class Installer {
 
     public static function postCreate() {
 
-        preg_match("/.*\/(?'vendor'.*)\/(?'bundle'.*)\/src$/", __DIR__, $matches);
+        preg_match("/.*\/(?'vendor'.*)\/(?'bundle'.*)$/", __DIR__, $matches);
 
         $vendor = self::toCamelCase($matches["vendor"]);
         $bundle = self::toCamelCase($matches["bundle"]);
