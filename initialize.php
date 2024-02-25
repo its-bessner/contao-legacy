@@ -162,7 +162,7 @@ class Installer {
         use Symfony\\Component\\DependencyInjection\\Extension\\Extension;
         use Symfony\\Component\\DependencyInjection\\Loader\\YamlFileLoader;
         
-        class $vendor_camel$bundle_camel extends Extension
+        class $vendor_camel{$bundle_camel}Extension extends Extension
         {
             public function load(array \$configs, ContainerBuilder \$container): void
             {
