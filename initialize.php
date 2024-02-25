@@ -5,14 +5,15 @@ class Installer {
 
         preg_match("/.*\/(?'vendor'.*)\/(?'bundle'.*)$/", __DIR__, $matches);
 
-        $vendor_snake = $matches["vendor"];
-        $bundle_snake = $matches["bundle"];
         $vendor_camel = self::toCamelCase($matches["vendor"]);
         $bundle_camel = self::toCamelCase($matches["bundle"]);
+        $vendor_snake = strtolower($vendor_camel);
+        $bundle_snake = strtolower($bundle_camel);
 
 
         self::setJson($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setConfigRoutes($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
+        self::setConfigServices($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
 
 
         print str_repeat(PHP_EOL, 2);
@@ -47,9 +48,6 @@ class Installer {
 
     public static function setConfigRoutes($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
 
-        $vendor_snake = strtolower(str_replace("-", "_", $vendor_snake));
-        $bundle_snake = strtolower(str_replace("-", "_", $bundle_snake));
-
         $content = <<<EOT
         $vendor_snake{$bundle_snake}_test:
           path: $vendor_snake$bundle_snake/test
@@ -59,6 +57,22 @@ class Installer {
         EOT;
 
         file_put_contents(__DIR__ . "/src/config/routes.yml", $content);
+
+
+    }
+
+    public static function setConfigServices($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
+
+        $content = <<<EOT
+        services:
+          $vendor_camel\\$bundle_camel\\Controller\\FrontendController:
+            public: true
+            arguments:
+              - '@doctrine.dbal.default_connection'
+              - 'Some other argument'
+        EOT;
+
+        file_put_contents(__DIR__ . "/src/config/services.yml", $content);
 
 
     }
