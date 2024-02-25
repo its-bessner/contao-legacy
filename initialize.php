@@ -47,11 +47,14 @@ class Installer {
 
     public static function setConfigRoutes($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
 
+        $vendor_snake = strtolower(str_replace("-", "_", $vendor_snake));
+        $bundle_snake = strtolower(str_replace("-", "_", $bundle_snake));
+
         $content = <<<EOT
         $vendor_snake{$bundle_snake}_test:
           path: $vendor_snake$bundle_snake/test
           defaults:
-            _controller: $vendor_camel\\$bundle_camel\\Controller\\FrontendController::test\
+            _controller: $vendor_camel\\$bundle_camel\\Controller\\FrontendController::test
             _scope: frontend
         EOT;
 
