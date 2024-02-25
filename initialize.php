@@ -10,14 +10,14 @@ class Installer {
         $bundle = self::toCamelCase($matches["bundle"]);
 
 
-        $json = json_decode(file_get_contents(__DIR__ . "/../composer.json"));
+        $json = json_decode(file_get_contents(__DIR__ . "/composer.json"));
         unset($json->scripts);
         $json->type = "contao-bundle";
         $json->name = $matches["vendor"] . "/" . $matches["bundle"];
         $json->description = "";
         $json->autoload = (object) ["psr-4" => (object) [$vendor . "\\" . $bundle . "\\" => "src/"]];
 
-        file_put_contents(__DIR__ . "/../composer.json", json_encode($json, JSON_UNESCAPED_SLASHES));
+        file_put_contents(__DIR__ . "/composer.json", json_encode($json, JSON_UNESCAPED_SLASHES));
 
 
 
