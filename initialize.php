@@ -173,7 +173,7 @@ class Installer {
 
         EOT;
 
-        file_put_contents(__DIR__ . "/src/DependencyInjection/$bundle_camel{$vendor_camel}Extension.php", $content);
+        file_put_contents(__DIR__ . "/src/DependencyInjection/$vendor_camel{$bundle_camel}Extension.php", $content);
 
     }
 
