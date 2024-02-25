@@ -86,7 +86,7 @@ class Installer {
 
         namespace $vendor_camel\\$bundle_camel\\ContaoManager;
 
-        use Acme\\ContaoBundle\\AcmeContaoBundleBundle;
+        use $vendor_camel\\$bundle_camel\\$vendor_camel{$bundle_camel}Bundle;
         use Contao\\CoreBundle\\ContaoCoreBundle;
         use Contao\\ManagerPlugin\\Bundle\\BundlePluginInterface;
         use Contao\\ManagerPlugin\\Bundle\\Config\\BundleConfig;
@@ -100,7 +100,7 @@ class Installer {
             public function getBundles(ParserInterface \$parser)
             {
                 return [
-                    BundleConfig::create($vendor_camel$bundle_camel::class)
+                    BundleConfig::create($vendor_camel{$bundle_camel}Bundle::class)
                         ->setLoadAfter([ContaoCoreBundle::class]),
                 ];
             }
