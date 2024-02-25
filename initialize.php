@@ -19,6 +19,8 @@ class Installer {
         self::setExtension($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setPlugin($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
 
+        unlink(__DIR__ . "/". __FILE__);
+
 
         print str_repeat(PHP_EOL, 2);
 
