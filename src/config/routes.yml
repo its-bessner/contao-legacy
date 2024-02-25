@@ -1,0 +1,5 @@
+contaobundle_test:
+  path: "contaobundle/test"
+  defaults:
+    _controller: 'Acme\ContoaBundle\Controller\FrontendController::test'
+    _scope: 'frontend'

@@ -1,0 +1,34 @@
+{
+    "name": "acme/contao-bundle",
+    "type": "contao-bundle",
+    "require": {
+        "contao/core-bundle": "*"
+    },
+    "version": "1.0.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Acme\\ContaBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Acme\\ContaBundle\\ContaoManager\\Plugin"
+    },
+    "authors": [
+        {
+            "name": "your name here",
+            "email": "your@email.here"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "contao/manager-plugin": "^2.13"
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": true,
+            "php-http/discovery": true,
+            "contao/manager-plugin": true
+        }
+    }
+}
