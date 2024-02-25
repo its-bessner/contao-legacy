@@ -49,10 +49,10 @@ class Installer {
 
         $content = <<<EOT
         $vendor_snake{$bundle_snake}_test:
-          path: \"$vendor_snake$bundle_snake/test\"
+          path: $vendor_snake$bundle_snake/test
           defaults:
-            _controller:\"$vendor_camel\\$bundle_camel\\Controller\\FrontendController::test\"
-            _scope: 'frontend'
+            _controller: $vendor_camel\\$bundle_camel\\Controller\\FrontendController::test\
+            _scope: frontend
         EOT;
 
         file_put_contents(__DIR__ . "/src/config/routes.yml", $content);
