@@ -16,6 +16,7 @@ class Installer {
         self::setConfigServices($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setContaoManager($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setFrontendController($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
+        self::setExtension($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
 
 
         print str_repeat(PHP_EOL, 2);
@@ -147,6 +148,32 @@ class Installer {
         EOT;
 
         file_put_contents(__DIR__ . "/src/Controller/FrontendController.php", $content);
+
+    }
+    
+    public static function setExtension($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
+
+        $content =<<<EOT
+        <?php
+        namespace $vendor_camel\\$bundle_camel\\DependencyInjection;
+        
+        use Symfony\\Component\\Config\\FileLocator;
+        use Symfony\\Component\\DependencyInjection\\ContainerBuilder;
+        use Symfony\\Component\\DependencyInjection\\Extension\\Extension;
+        use Symfony\\Component\\DependencyInjection\\Loader\\YamlFileLoader;
+        
+        class AcmeContaoBundleExtension extends Extension
+        {
+            public function load(array \$configs, ContainerBuilder \$container): void
+            {
+                \$loader = new YamlFileLoader(\$container, new FileLocator(__DIR__ . '/../config'));
+                \$loader->load('services.yml');
+            }
+        }
+
+        EOT;
+
+        file_put_contents(__DIR__ . "/src/DependencyInjection/$bundle_camel{$vendor_camel}Extension.php", $content);
 
     }
 
