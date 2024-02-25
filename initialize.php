@@ -48,7 +48,7 @@ class Installer {
     public static function setConfigRoutes($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
 
         $content = <<<EOT
-        $vendor_snake${bundle_snake}_test:
+        $vendor_snake{$bundle_snake}_test:
           path: \"$vendor_snake$bundle_snake/test\"
           defaults:
             _controller:\"$vendor_camel\\$bundle_camel\\Controller\\FrontendController::test\"
