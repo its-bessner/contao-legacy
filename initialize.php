@@ -15,6 +15,7 @@ class Installer {
         self::setConfigRoutes($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setConfigServices($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setContaoManager($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
+        self::setFrontendController($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
 
 
         print str_repeat(PHP_EOL, 2);
@@ -77,8 +78,8 @@ class Installer {
 
 
     }
-    
-    
+
+
     public static function setContaoManager($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
 
         $content =<<<EOT
@@ -115,7 +116,39 @@ class Installer {
 
         file_put_contents(__DIR__ . "/src/ContaoManager/Plugin.php", $content);
 
+    }
+
+    public static function setFrontendController($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
+
+        $content =<<<EOT
+        <?php
+        namespace $vendor_camel\\$bundle_camel\\Controller;
+        use Doctrine\\DBAL\\Connection;
+        use Symfony\\Component\\HttpFoundation\\Response;
+        
+        class FrontendController {
+        
+            private Connection \$dbal;
+            private string \$name;
+        
+            public function __construct(Connection \$dbal, string \$name)
+            {
+                \$this->dbal = \$dbal;
+                \$this->name = \$name;
+            }
+        
+            public function test() {
+                return new Response("Your 2nd argument: '" . \$this->name . "'");
+            }
+        
+        
         }
+
+        EOT;
+
+        file_put_contents(__DIR__ . "/src/Controller/FrontendController.php", $content);
+
+    }
 
 }
 
