@@ -76,6 +76,45 @@ class Installer {
 
 
     }
+    
+    
+    public static function setContaoManager($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
+
+        $content =<<<EOT
+        <?php
+
+        namespace $vendor_camel\\$bundle_camel\\ContaoManager;
+
+        use Acme\\ContaoBundle\\AcmeContaoBundleBundle;
+        use Contao\\CoreBundle\\ContaoCoreBundle;
+        use Contao\\ManagerPlugin\\Bundle\\BundlePluginInterface;
+        use Contao\\ManagerPlugin\\Bundle\\Config\\BundleConfig;
+        use Contao\\ManagerPlugin\\Routing\\RoutingPluginInterface;
+        use Contao\\ManagerPlugin\\Bundle\\Parser\\ParserInterface;
+        use Symfony\\Component\\Config\\Loader\\LoaderResolverInterface;
+        use Symfony\\Component\\HttpKernel\\KernelInterface;
+
+        class Plugin implements BundlePluginInterface, RoutingPluginInterface
+        {
+            public function getBundles(ParserInterface \$parser)
+            {
+                return [
+                    BundleConfig::create($vendor_camel$bundle_camel::class)
+                        ->setLoadAfter([ContaoCoreBundle::class]),
+                ];
+            }
+
+            public function getRouteCollection(LoaderResolverInterface \$resolver, KernelInterface \$kernel)
+            {
+                \$file = __DIR__ . '/..//config/routes.yml';
+                return \$resolver->resolve(\$file)->load(\$file);
+            }
+        }
+        EOT;
+
+        file_put_contents(__DIR__ . "/src/ContaoManager/Plugin.php", $content);
+
+        }
 
 }
 
