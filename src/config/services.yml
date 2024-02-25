@@ -1,6 +1,0 @@
-services:
-  Acme\ContaoBundle\Controller\FrontendController:
-    public: true
-    arguments:
-      - '@doctrine.dbal.default_connection'
-      - 'Some other argument'
