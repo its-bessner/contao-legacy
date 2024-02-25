@@ -14,6 +14,7 @@ class Installer {
         self::setJson($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setConfigRoutes($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setConfigServices($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
+        self::setContaoManager($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
 
 
         print str_repeat(PHP_EOL, 2);
