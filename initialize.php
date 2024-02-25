@@ -17,6 +17,7 @@ class Installer {
         self::setContaoManager($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setFrontendController($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setExtension($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
+        self::setPlugin($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
 
 
         print str_repeat(PHP_EOL, 2);
@@ -174,6 +175,31 @@ class Installer {
         EOT;
 
         file_put_contents(__DIR__ . "/src/DependencyInjection/$vendor_camel{$bundle_camel}Extension.php", $content);
+
+    }
+    
+    public static function setPlugin($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
+
+        $content =<<<EOT
+        <?php
+        
+        
+        namespace $vendor_camel\\$bundle_camel;
+        
+        
+        use \\Exception;
+        use Symfony\\Component\\HttpKernel\\Bundle\\Bundle;
+        
+        class $vendor_camel{$bundle_camel}Bundle extends Bundle {
+            public function getPath(): string
+            {
+                return \\dirname(__DIR__);
+            }
+        }
+
+        EOT;
+
+        file_put_contents(__DIR__ . "/src/$vendor_camel{$bundle_camel}Bundle.php", $content);
 
     }
 
