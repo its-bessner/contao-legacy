@@ -2,8 +2,6 @@
 class Installer {
 
     public static function postCreate() {
-        unlink(__DIR__ . "/Dummy.php");
-
         preg_match("/.*\/(?'vendor'.*)\/(?'bundle'.*)\/src$/", __DIR__, $matches);
 
         $vendor = self::toCamelCase($matches["vendor"]);
