@@ -78,7 +78,7 @@ class Installer {
               - '@doctrine.dbal.default_connection'
               - 'Some other argument'
               
-        $vendor_camel\\$bundle_camel\\Command\\$vendor_camel{$bundle_camel}Command:
+        $vendor_camel\\$bundle_camel\\Command\\$vendor_camel{$bundle_camel}:run:
             tags: [ 'console.command' ]
             arguments:
               - '@doctrine.dbal.default_connection'
@@ -187,7 +187,7 @@ class Installer {
         
             protected function configure()
             {
-                \$this->setName('$vendor_snake:$bundle_snake:command')
+                \$this->setName('$vendor_snake:$bundle_snake:run')
                     ->setDescription('Custom command for the $vendor_camel::$bundle_camel plugin')
                     ->setHelp('Cutomize help text!');
             }
