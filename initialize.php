@@ -78,7 +78,7 @@ class Installer {
               - '@doctrine.dbal.default_connection'
               - 'Some other argument'
               
-        $vendor_camel\\$bundle_camel\\Command\\$vendor_camel{$bundle_camel}Command:
+        $vendor_camel\\$bundle_camel\\Command\\$vendor_camel{$bundle_camel}Command
             tags: [ 'console.command' ]
             arguments:
               - '@doctrine.dbal.default_connection'
