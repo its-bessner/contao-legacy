@@ -18,6 +18,7 @@ class Installer {
         self::setFrontendController($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setExtension($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
         self::setPlugin($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
+        self::setCommand($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel);
 
         unlink( __FILE__);
 
@@ -76,6 +77,12 @@ class Installer {
             arguments:
               - '@doctrine.dbal.default_connection'
               - 'Some other argument'
+              
+            $vendor_camel\\$bundle_camel\\Command\\$vendor_camel{$bundle_camel}Command:
+                tags: [ 'console.command' ]
+                arguments:
+                  - '@doctrine.dbal.default_connection'
+                  - 'Some other argument'
         EOT;
 
         file_put_contents(__DIR__ . "/src/config/services.yml", $content);
@@ -151,6 +158,50 @@ class Installer {
         EOT;
 
         file_put_contents(__DIR__ . "/src/Controller/FrontendController.php", $content);
+
+    }
+
+    public static function setCommand($vendor_snake, $bundle_snake, $vendor_camel, $bundle_camel) {
+
+        $content = <<<EOT
+        <?php
+
+        namespace $vendor_camel\\$bundle_camel\Command;
+        
+        use Symfony\Component\Console\Command\Command;
+        use Symfony\Component\Console\Input\InputInterface;
+        use Symfony\Component\Console\Output\OutputInterface;
+        use Doctrine\DBAL\Connection;
+        
+        class HandleFinishedEvents extends Command
+        {
+        
+            private Connection \$dbal;
+        
+            public function __construct(Connection \$dbal)
+            {
+        
+                \$this->dbal = \$dbal;
+                parent::__construct();
+            }
+        
+            protected function configure()
+            {
+                \$this->setName('$vendor_snake:$bundle_snake:command')
+                    ->setDescription('Custom command for the $vendor_camel::$bundle_camel plugin')
+                    ->setHelp('Cutomize help text!');
+            }
+        
+            protected function execute(InputInterface \$input, OutputInterface \$output)
+            {
+        
+                \$output->writeln("Command for $vendor_camel::$bundle_camel executed");
+            }
+        }
+        EOT;
+
+        file_put_contents(__DIR__ . "/src/Command/$vendor_camel{$bundle_camel}Command.php", $content);
+
 
     }
     
