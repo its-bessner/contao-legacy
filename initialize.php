@@ -78,11 +78,11 @@ class Installer {
               - '@doctrine.dbal.default_connection'
               - 'Some other argument'
               
-            $vendor_camel\\$bundle_camel\\Command\\$vendor_camel{$bundle_camel}Command:
-                tags: [ 'console.command' ]
-                arguments:
-                  - '@doctrine.dbal.default_connection'
-                  - 'Some other argument'
+        $vendor_camel\\$bundle_camel\\Command\\$vendor_camel{$bundle_camel}Command:
+            tags: [ 'console.command' ]
+            arguments:
+              - '@doctrine.dbal.default_connection'
+              - 'Some other argument'
         EOT;
 
         file_put_contents(__DIR__ . "/src/config/services.yml", $content);
@@ -173,7 +173,7 @@ class Installer {
         use Symfony\Component\Console\Output\OutputInterface;
         use Doctrine\DBAL\Connection;
         
-        class HandleFinishedEvents extends Command
+        class $vendor_camel{$bundle_camel}Command extends Command
         {
         
             private Connection \$dbal;
