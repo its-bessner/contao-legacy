@@ -187,7 +187,7 @@ class Installer {
         
             protected function configure()
             {
-                \$this->setName('$vendor_snake:$bundle_snake:command')
+                \$this->setName('$vendor_snake:$bundle_snake:run')
                     ->setDescription('Custom command for the $vendor_camel::$bundle_camel plugin')
                     ->setHelp('Cutomize help text!');
             }
