@@ -196,6 +196,7 @@ class Installer {
             {
         
                 \$output->writeln("Command for $vendor_camel::$bundle_camel executed");
+                return 0;
             }
         }
         EOT;
