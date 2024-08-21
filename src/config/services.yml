@@ -1,0 +1,12 @@
+services:
+    ItsBessner\ContaoLegacy\Controller\FrontendController:
+        public: true
+        arguments:
+          - '@doctrine.dbal.default_connection'
+          - 'Some other argument'
+          
+    ItsBessner\ContaoLegacy\Command\ItsBessnerContaoLegacyCommand:
+        tags: [ 'console.command' ]
+        arguments:
+          - '@doctrine.dbal.default_connection'
+          - 'Some other argument'

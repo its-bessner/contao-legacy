@@ -1,0 +1,5 @@
+itsbessnercontaolegacy_test:
+  path: itsbessnercontaolegacy/test
+  defaults:
+    _controller: ItsBessner\ContaoLegacy\Controller\FrontendController::test
+    _scope: frontend
