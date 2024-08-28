@@ -29,6 +29,10 @@ class ContaoLegacy {
 
     }
 
+    public static function getSystemRoot() {
+        return System::getContainer()->getParameter('kernel.project_dir');
+    }
+
 
 
 }
